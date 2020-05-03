@@ -4,5 +4,5 @@ export interface ProductOffer {
 }
 
 export interface ProductOffers {
-  [key: string]: ProductOffer
+  [key: string]: ProductOffer;
 }

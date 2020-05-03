@@ -29,7 +29,7 @@ describe('Product Cost Service', () => {
       B: 6,
       C: 20.12,
       D: 15.12
-    }
+    };
 
     prices = new ProductPrices(inputPrices);
     costService = new ProductCostServiceImpl(prices);
@@ -52,7 +52,5 @@ describe('Product Cost Service', () => {
 
     // Assert
     expect(totalCost).to.be.equal('0.00');
-  })
+  });
 });
-
-
