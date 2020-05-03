@@ -14,7 +14,7 @@ describe('Product Cost Service', () => {
   let costService: ProductCostService;
 
   beforeEach(() => {
-    items = ['A', 'A', 'A', 'A', 'B', 'B','B',  'C', 'C', 'C', 'D'];
+    items = ['A', 'A', 'A', 'A', 'B', 'B','B', 'C', 'C', 'C', 'D'];
     offers = {
       A: {
         itemNumber: 3,
@@ -42,6 +42,17 @@ describe('Product Cost Service', () => {
     // Assert
     expect(totalCost).to.be.equal(330);
   });
+
+  it('should return 0 if items are empty', () => {
+    // Arrange
+    const emptyItems = [] as string[];
+
+    // Act
+    const totalCost = costService.getTotalCost(emptyItems, prices, offers);
+
+    // Assert
+    expect(totalCost).to.be.equal(0);
+  })
 });
 
 

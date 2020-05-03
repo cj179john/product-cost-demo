@@ -38,8 +38,6 @@ export class ProductCostServiceImpl implements ProductCostService {
       }
     });
 
-    return Object.keys(this.productCosts).reduce((total, productKey) => {
-     return total +=  this.productCosts[productKey].cost;
-    }, 0);
+    return Object.values(this.productCosts).reduce((total, product) => total +=  product.cost, 0);
   }
 }

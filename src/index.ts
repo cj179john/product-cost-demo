@@ -1,6 +1,6 @@
 import { ProductCostServiceImpl } from './services/productCostService';
 
-const checkoutItems = ['A', 'A', 'A', 'A', 'B', 'B','B',  'C', 'C', 'C', 'D'];
+const checkoutItems = ['A', 'A', 'A', 'A', 'B', 'B','B', 'C', 'C', 'C', 'D'];
 const offers = {
   A: {
     itemNumber: 3,
