@@ -1,11 +1,8 @@
-import {expect, use} from 'chai';
-import * as sinonChai from 'sinon-chai';
+import {expect} from 'chai';
 import {describe} from 'mocha';
 import { ProductOffers } from '../models/ProductOffers';
 import { ProductPrices } from '../models/ProductPrices';
 import { ProductCostService, ProductCostServiceImpl } from './productCostService';
-
-use(sinonChai);
 
 describe('Product Cost Service', () => {
   let items: string[];
