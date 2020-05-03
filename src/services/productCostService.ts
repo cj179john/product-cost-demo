@@ -1,8 +1,14 @@
 import { ProductOffers } from '../models/ProductOffers';
 import { ProductPrices } from '../models/ProductPrices';
-import { ProductCosts } from '../models/ProductCosts';
 
 export type CheckoutItems = string [];
+
+export interface ProductCosts {
+  [key: string]: {
+    cost: number;
+    count: number;
+  };
+}
 
 export interface ProductCostService {
   getTotalCost(items: CheckoutItems, productPrices: ProductPrices, productOffers: ProductOffers): string;
