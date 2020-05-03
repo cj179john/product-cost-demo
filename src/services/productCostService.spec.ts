@@ -1,12 +1,13 @@
 import {expect} from 'chai';
 import {describe} from 'mocha';
 import { ProductOffers } from '../models/ProductOffers';
-import { ProductPrices } from '../models/ProductPrices';
+import { ProductPrices, InputProductPrices } from '../models/ProductPrices';
 import { ProductCostService, ProductCostServiceImpl } from './productCostService';
 
 describe('Product Cost Service', () => {
   let items: string[];
   let offers: ProductOffers;
+  let inputPrices: InputProductPrices;
   let prices: ProductPrices;
   let costService: ProductCostService;
 
@@ -15,20 +16,22 @@ describe('Product Cost Service', () => {
     offers = {
       A: {
         itemNumber: 3,
-        total: 130
+        total: 11.99
       },
       B: {
         itemNumber: 2,
-        total: 45
+        total: 9.99
       }
     };
-    prices = {
-      A: 50,
-      B: 30,
-      C: 20,
-      D: 15
+
+    inputPrices = {
+      A: 5.343,
+      B: 6,
+      C: 20.12,
+      D: 15.12
     }
 
+    prices = new ProductPrices(inputPrices);
     costService = new ProductCostServiceImpl(prices);
   });
 
@@ -37,7 +40,7 @@ describe('Product Cost Service', () => {
     const totalCost = costService.getTotalCost(items, prices, offers);
 
     // Assert
-    expect(totalCost).to.be.equal(330);
+    expect(totalCost).to.be.equal('108.80');
   });
 
   it('should return 0 if items are empty', () => {
@@ -48,7 +51,7 @@ describe('Product Cost Service', () => {
     const totalCost = costService.getTotalCost(emptyItems, prices, offers);
 
     // Assert
-    expect(totalCost).to.be.equal(0);
+    expect(totalCost).to.be.equal('0.00');
   })
 });
 

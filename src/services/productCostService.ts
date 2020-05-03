@@ -5,14 +5,14 @@ import { ProductCosts } from '../models/ProductCosts';
 export type CheckoutItems = string [];
 
 export interface ProductCostService {
-  getTotalCost(items: CheckoutItems, productPrices: ProductPrices, productOffers: ProductOffers): number;
+  getTotalCost(items: CheckoutItems, productPrices: ProductPrices, productOffers: ProductOffers): string;
 }
 
 export class ProductCostServiceImpl implements ProductCostService {
   private productCosts: ProductCosts = {};
 
   constructor(productPrices: ProductPrices) {
-    Object.keys(productPrices).forEach(productName => this.productCosts[productName] = {cost: 0, count: 0});
+    productPrices.getProductNames().forEach(productName => this.productCosts[productName] = {cost: 0, count: 0});
   }
 
   private getOfferCost(itemName: string, itemCount: number, productOffers: ProductOffers) {
@@ -22,13 +22,13 @@ export class ProductCostServiceImpl implements ProductCostService {
 
     const offerCount = productOffers[itemName].itemNumber;
     const numberOfOffers = Math.floor(itemCount / offerCount);
-    return (offerCount === itemCount) ? productOffers[itemName].total * numberOfOffers : 0;
+    return (offerCount === itemCount) ? (productOffers[itemName].total * numberOfOffers) : 0;
   }
 
   public getTotalCost(items: CheckoutItems, productPrices: ProductPrices, productOffers: ProductOffers) {
     items.forEach(itemName => {
 
-      this.productCosts[itemName].cost += productPrices[itemName];
+      this.productCosts[itemName].cost += productPrices.getPrice(itemName);
       this.productCosts[itemName].count += 1;
 
       const offerPrice = this.getOfferCost(itemName, this.productCosts[itemName].count, productOffers);
@@ -38,6 +38,6 @@ export class ProductCostServiceImpl implements ProductCostService {
       }
     });
 
-    return Object.values(this.productCosts).reduce((total, product) => total +=  product.cost, 0);
+    return Object.values(this.productCosts).reduce((total, product) => total +=  product.cost, 0).toFixed(2);
   }
 }

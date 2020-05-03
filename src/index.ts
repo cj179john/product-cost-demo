@@ -1,4 +1,5 @@
 import { ProductCostServiceImpl } from './services/productCostService';
+import { ProductPrices } from './models/ProductPrices';
 
 const checkoutItems = ['A', 'A', 'A', 'A', 'B', 'B','B', 'C', 'C', 'C', 'D'];
 const offers = {
@@ -19,8 +20,9 @@ const prices = {
   D: 15
 };
 
-const productCostService = new ProductCostServiceImpl(prices);
+const productPrices = new ProductPrices(prices);
+const productCostService = new ProductCostServiceImpl(productPrices);
 
-const totalCost = productCostService.getTotalCost(checkoutItems, prices, offers);
+const totalCost = productCostService.getTotalCost(checkoutItems, productPrices, offers);
 
 console.log(totalCost);
