@@ -15,11 +15,13 @@
     "mocha": "^7.1.2",
     "sinon": "^9.0.2",
     "sinon-chai": "^3.5.0",
+    "ts-mocha": "^7.0.0",
     "ts-node": "^8.9.1",
     "typescript": "^3.8.3"
   },
   "scripts": {
     "watch": "tsc -w",
-    "execute": "ts-node src/index.ts"
+    "execute": "ts-node src/index.ts",
+    "test": "ts-mocha src/**/*.spec.ts"
   }
 }
